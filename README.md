@@ -1,6 +1,6 @@
 # Kick.com User Selector
 
-A browser extension for Kick.com that allows you to replace usernames in API requests when clicking on usernames in the Kick.com interface. This is particularly useful for streamers and moderators who want to interact with specific users programmatically.
+A browser extension for Kick.com that allows you to replace usernames in API requests when clicking on usernames in the Kick.com interface. This is particularly useful for streamers and moderators who want to interact with specific users programmatically or gift the sub for a user is not in the chat that time.
 
 ## Features
 
