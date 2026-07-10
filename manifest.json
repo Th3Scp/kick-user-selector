@@ -1,0 +1,28 @@
+{
+    "manifest_version": 3,
+    "name": "Kick.com User Selector",
+    "description": "a Extention for selecting users on Kick.com and can give sub or ext...",
+    "version": "1.1",
+    "action": {
+        "default_popup": "popup.html",
+        "default_title": "Kick User Selector",
+        "default_icon": {
+            "16": "icons/icon.png",
+            "48": "icons/icon.png",
+            "128": "icons/icon.png"
+        }
+    },
+    "permissions": [
+        "storage",
+        "scripting",
+        "activeTab",
+        "tabs"
+    ],
+    "host_permissions": [
+        "http://*/*",
+        "https://*/*"
+    ],
+    "background": {
+        "service_worker": "background.js"
+    }
+}

@@ -1,0 +1,262 @@
+<!doctype html>
+<html lang="fa">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Kick Rewrite</title>
+    <style>
+        :root {
+            --width: 360px;
+            --max-h: 520px;
+            --radius: 12px;
+            --muted: #93a0ad;
+            --accent-start: #7c3aed;
+            --accent-end: #06b6d4;
+        }
+
+        /* reset */
+        * {
+            box-sizing: border-box;
+        }
+
+        html,
+        body {
+            margin: 0;
+            padding: 0;
+            width: var(--width);
+            height: 100%;
+            font-family: Inter, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+        }
+
+        body {
+            background: linear-gradient(180deg, #081024 0%, #07121a 100%);
+            color: #e6eef6;
+            display: flex;
+            align-items: flex-start;
+            justify-content: center;
+            padding: 12px;
+        }
+
+        .container {
+            width: 100%;
+            max-height: var(--max-h);
+            overflow: auto;
+            /* allow scroll if popup gets taller than allowed */
+            background: linear-gradient(180deg, rgba(255, 255, 255, 0.02), rgba(255, 255, 255, 0.01));
+            border-radius: var(--radius);
+            padding: 14px;
+            box-shadow: 0 10px 28px rgba(2, 6, 23, 0.6);
+            border: 1px solid rgba(255, 255, 255, 0.03);
+        }
+
+        .header {
+            display: flex;
+            gap: 10px;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+
+        .logo {
+            width: 40px;
+            height: 40px;
+            border-radius: 10px;
+            background: linear-gradient(90deg, var(--accent-start), var(--accent-end));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 15px;
+            color: white;
+            box-shadow: 0 8px 22px rgba(124, 58, 237, 0.14);
+        }
+
+        .title {
+            font-size: 15px;
+            margin: 0;
+        }
+
+        .subtitle {
+            font-size: 12px;
+            color: var(--muted);
+            margin-top: 4px;
+        }
+
+        .form {
+            display: flex;
+            gap: 10px;
+            margin-top: 20px;
+            align-items: center;
+        }
+
+        .input-wrap {
+            position: relative;
+            flex: 1;
+        }
+
+        input#username {
+            width: 100%;
+            padding: 10px 38px 10px 12px;
+            border-radius: 10px;
+            border: 1px solid rgba(255, 255, 255, 0.04);
+            background: rgba(255, 255, 255, 0.02);
+            color: inherit;
+            font-size: 13px;
+            outline: none;
+        }
+
+        input#username::placeholder {
+            color: #9aa4b2;
+            opacity: 0.9;
+        }
+
+        input#username:focus {
+            box-shadow: 0 8px 18px rgba(7, 89, 133, 0.08);
+            border-color: rgba(124, 58, 237, 0.8);
+            transform: translateY(-1px);
+        }
+
+        .input-icon {
+            position: absolute;
+            right: 8px;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 28px;
+            height: 28px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            pointer-events: none;
+            opacity: 0.95;
+        }
+
+        button#save {
+            background: linear-gradient(90deg, var(--accent-start), var(--accent-end));
+            border: none;
+            color: white;
+            padding: 10px 12px;
+            border-radius: 10px;
+            cursor: pointer;
+            font-weight: 600;
+            min-width: 88px;
+        }
+
+        button#save:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+        }
+
+        .meta {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 8px;
+            margin-top: 5px;
+        }
+
+        .hint {
+            color: var(--muted);
+            font-size: 12px;
+            line-height: 1.2;
+        }
+
+        .status {
+            font-size: 12px;
+            color: #a7f3d0;
+            background: rgba(167, 243, 208, 0.06);
+            padding: 6px 8px;
+            border-radius: 8px;
+            display: inline-block;
+        }
+
+        .footer {
+            margin-top: 12px;
+            display: flex;
+            gap: 8px;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .small-btn {
+            font-size: 12px;
+            padding: 7px 10px;
+            border-radius: 9px;
+            border: 1px solid rgba(255, 255, 255, 0.03);
+            background: transparent;
+            color: var(--muted);
+            cursor: pointer;
+        }
+
+        .small-btn:focus,
+        button#save:focus {
+            outline: 3px solid rgba(124, 58, 237, 0.12);
+            outline-offset: 2px;
+        }
+
+        .sr-only {
+            position: absolute;
+            width: 1px;
+            height: 1px;
+            padding: 0;
+            margin: -1px;
+            overflow: hidden;
+            clip: rect(0, 0, 0, 0);
+            white-space: nowrap;
+            border: 0;
+        }
+
+        @media (max-width:360px) {
+            :root {
+                --width: 320px;
+                --max-h: 480px;
+            }
+
+            html,
+            body {
+                width: var(--width);
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container" role="dialog" aria-label="Kick User Selector">
+        <div class="header">
+            <div class="logo" aria-hidden="true">❤️</div>
+            <div style="flex:1">
+                <h1 class="title">Kick User Selector</h1>
+                <div class="subtitle">Kick User Selector</div>
+            </div>
+        </div>
+
+        <div class="form" role="form" aria-labelledby="username">
+            <div class="input-wrap">
+                <label for="username" class="sr-only">Username</label>
+                <input id="username" placeholder="UserName :" aria-label="username" autocomplete="off"  />
+                <div class="input-icon" aria-hidden="true">
+                    <!-- simple user SVG -->
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M12 12c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5z" fill="currentColor"
+                            opacity="0.9" />
+                        <path d="M4 20c0-3.31 2.69-6 6-6h4c3.31 0 6 2.69 6 6v1H4v-1z" fill="currentColor"
+                            opacity="0.9" />
+                    </svg>
+                </div>
+            </div>
+
+            <button id="save" title="Save and inject">Set</button>
+        </div>
+
+        <div class="meta" style="margin-top:5px;">
+            <div id="savedStatus" class="status" style="display:none">Saved</div>
+        </div>
+
+        <div class="footer">
+            <button id="clearBtn" class="small-btn" title="Clear saved username">Clear</button>
+        </div>
+    </div>
+
+    <script src="popup.js"></script>
+</body>
+
+</html>
